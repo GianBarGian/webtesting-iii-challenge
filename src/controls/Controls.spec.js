@@ -12,10 +12,20 @@ describe('Control component tests', () => {
     })
 
     it('should changes buttons text to reflect the state the door will be in if clicked', () => {
-        // display default value
-        // click on button 
-        // display changed value
-        const wrapper = rt.render(<Controls />);
-        rt.fireEvent.click(wrapper.getByText(/close/i));
+        const wrapper = rt.render(<Controls  closed={true} locked={true}/>);
+        expect(wrapper.getByText(/open/i));
+        expect(wrapper.getByText(/unlock/i));
+    })
+
+    it('should disable the closed button if gate is locked', () => {
+        const wrapper = rt.render(<Controls closed={true} locked={true}/>);
+        expect(wrapper.getByText(/open/i).hasAttribute('disabled')).toBeTruthy();
+        
+    })
+
+    it('should disable the unlock button if gate is open', () => {
+        const wrapper = rt.render(<Controls closed={false} locked={false}/>);
+        expect(wrapper.getByText(/lock/i).hasAttribute('disabled')).toBeTruthy();
+        
     })
 })

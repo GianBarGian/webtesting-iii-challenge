@@ -2,6 +2,8 @@ import React from 'react'
 import * as rt from 'react-testing-library';
 import Display from './Display';
 
+afterEach(rt.cleanup);
+
 describe('Display Component', () => {
     it('displays "Closed" if the closed prop is true and "Open" if otherwise', () => {
         let wrap = rt.render(<Display closed={true} />);
